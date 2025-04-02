@@ -13,3 +13,5 @@ JJIN Goodbye spc
 충돌
 
 또 수정
+
+VS코드로 충돌 병합 만들기
