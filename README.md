@@ -9,5 +9,5 @@ JJIN Goodbye spc
 충돌
 
 충돌2
-
+(자동머지)
 충돌3
