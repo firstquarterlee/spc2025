@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .square {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        transition-property: width, height; /* 속성값 잘~ */
+        transition-duration: 1s;
+        transition-timing-function: ease-out;
+      }
+      .square:hover {
+        width: 150px;
+        height: 150px;
+      }
+      .button {
+        color: black;
+        transition-property: color;
+        transition-duration: 2s;
+        transition-timing-function: ease;
+      }
+      .button:hover {
+        color: red;
+      }
+      .images {
+        width: 300px;
+        transition-property: transform;
+        transition-duration: 2s;
+        transition-timing-function: ease;
+      }
+      .images:hover {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="square"></div>
+    <hr />
+    <button class="button">Hover me</button>
+    <hr />
+    <img src="scene1.jpeg" alt="image" class="images" />
+  </body>
+</html>
