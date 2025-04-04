@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>화면 리프레쉬 예제</h1>
+    <p>이 페이지는 3초후에 리프래쉬 됩니다.</p>
+    <script>
+      // document. <--- DOM 제어
+      // window. <---- 창(브라우저창)을 제어
+      window.onload = function () {
+        // 3초 기다렸다가 시작
+        //setTimeout(() => {}, 3000); // 3000ms = 3s
+        //setTimeout(function () {
+        // console.log("3초 기다렸음");
+        //}, 3000); //3초 기다렸다가 여기 위에 줄 내용을 실행함.
+      };
+      //location.reload(); ---> 화면 리프레쉬
+      //location = location // 주소창을 주소창으로 만들기
+      //location.href = location.href; // 주소 창에 주소글자 입력하기
+
+      // 이건 밖에 뺀거임
+      function displayText() {
+        console.log("3초 기다렸음!!");
+      }
+      setTimeout(displayText, 3000);
+
+      // 이것이 비동기 호출
+    </script>
+  </body>
+</html>
