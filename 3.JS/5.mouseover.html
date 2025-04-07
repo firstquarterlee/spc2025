@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      #myElement {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myElement"></div>
+    <script>
+      // const myElement = document.getElementById("myElement");
+      document
+        .getElementById("myElement")
+        .addEventListener("mouseover", (e) => {
+          console.log("마우스 올라감");
+          // 마우스 올렸을때 색상을 바꾸고 싶으면?
+          const myElement = document.getElementById("myElement");
+          myElement.style.backgroundColor = "red";
+        });
+      document.getElementById("myElement").addEventListener("mouseout", (e) => {
+        console.log("마우스 나감");
+        myElement.style.backgroundColor = "black";
+      });
+    </script>
+  </body>
+</html>
