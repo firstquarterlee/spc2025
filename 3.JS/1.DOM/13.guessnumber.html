@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>숫자 맞추기 게임</h1>
+    <h2>1~100까지의 숫자 맞추기...</h2>
+    <input type="number" id="guessNumber" placeholder="숫자를 입력하시오" />
+    <button id="guessButton" onclick="checkUserInput()">Guess</button>
+    <div>
+      <button onclick="setNumber(7)">7</button>
+      <button onclick="setNumber(8)">8</button>
+    </div>
+    <ol id="result"></ol>
+
+    <script>
+      // 미션1. 랜덤 숫자를 만들고 기억해둔다
+      //        힌트: Math.random() <-- 위에 범위내의 숫자가 생성
+      const randomNumber = Math.floor(Math.random() * 100) + 1;
+      console.log("랜덤숫자: ", randomNumber);
+
+      const userInput = document.getElementById("guessNumber");
+      const history = document.getElementById("result");
+      console.log(userInput);
+
+      function setNumber(number) {
+        userInput.value = number;
+      }
+
+      function checkUserInput() {
+        const userInputValue = Number(userInput.value);
+        console.log(userInput.value);
+        if (userInput.value < randomNumber) {
+          console.log("숫자가 작음");
+          result.innerHTML = "<B>숫자가 작음</B>";
+        } else if (userInput.value > randomNumber) {
+          console.log("숫자가 큼");
+          result.innerHTML = "<B>숫자가 큼</B>";
+        } else {
+          console.log("정답임");
+          result.innerHTML =
+            '<B style="color:red"> 축하합니다. 정답입니다.</B>';
+        }
+        // 미션4. 나의 찍기 기록을 계속 화면에 두고싶음.
+        const newResult = document.createElement("li");
+        newResult.innerHTML =
+          "사용자 입력: " + userInputValue + ", " + result.innerHTML;
+        console.log(newResult);
+        history.appendChild(newResult);
+      }
+
+      // 미션5. 각각의 입력값 뒤에 그 결과도 함께 적기
+
+      // 미션3. 풀이를 하면서... 어떻게 숫자를 찍어야 가장 좋은것인가?? 나는 몇번만에 맞출수 있는가??
+      //        1, 2, 3, 4, 5, ... 100
+      //        몇번만에 맞추는게 이론적으로 가장 좋은건가? 가장 큰 숫자인가?
+      //        나의 방법으로 이 게임을 하면 아~~무리 못해도 N 번만에 나는 무조건 풀수 있다...
+      // 바이너리 서치, 수학적인 계산식 log(100) = 6.64 = 7번을 찍어야함!
+    </script>
+  </body>
+</html>
