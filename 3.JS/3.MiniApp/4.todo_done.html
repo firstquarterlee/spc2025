@@ -15,7 +15,7 @@
   <body>
     <h1>투두(Todo) 리스트</h1>
     <input id="new-todo" type="text" placeholder="할 일 추가" />
-    <button id="add-todo">추가</button>
+    <button id="add-todo">Add</button>
     <hr />
     <ul id="todo-list"></ul>
     <script>
@@ -26,29 +26,28 @@
         if (inputBox.value.trim() === "") return;
 
         const new_li = document.createElement("li");
-        //new_li.textContent = inputBox.value;
+        // new_li.textContent = inputBox.value;
         new_li.innerHTML = `${inputBox.value} <button class="delete">삭제</button>`;
 
         inputBox.value = "";
+        todoList.appendChild(new_li);
 
         // 미션2. 완료기능 구현
-        // 미션2-1. 각 요소마다 클릭 가능한 이벤트를 추가한다.
-        // 미션3-2. 그 요소를 클릭했을 때 디자인 속성을 추가(done).
-
-        console.log("체크");
-        // 취소선 긋기(완료(done))
-        new_li.addEventListener("click", (e) => {
+        // 미션2-1. 각 요소마다 클릭 가능한 이벤트를 추가한다
+        new_li.addEventListener("click", () => {
+          // 미션2-2. 그 요소를 클릭했을때 디자인 속성을 추가(done)
           new_li.classList.toggle("done");
         });
-        todoList.appendChild(new_li);
+
+        // 미션3. 삭제 기능 추가
+        const deleteButton = new_li.querySelector(".delete");
+        deleteButton.addEventListener("click", (e) => {
+          console.log(e);
+          new_li.remove();
+        });
       });
 
-      const deleteButton = new_li.document.querySelector(".delete");
-      deleteButton.addEventListener("click", () => {
-        new_li.remove();
-      });
-
-      document.getElementById("new-todo").addEventListener("keydown", () => {
+      document.getElementById("new-todo").addEventListener("keydown", (e) => {
         if (event.key === "Enter") {
           document.getElementById("add-todo").click();
         }
@@ -56,10 +55,3 @@
     </script>
   </body>
 </html>
-
-<!-- 
-     미션3. 삭제기능 추가
-     미션3-1. <button> 추가해서
-     미션3-2. 해당 버튼에 이벤트 핸들러 추가
-     미션3-3 해당 요소.remove() 
--->

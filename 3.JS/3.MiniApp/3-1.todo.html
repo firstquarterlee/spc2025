@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>다시 투두만들기</title>
+  </head>
+  <body>
+    <h1>투두 리스트</h1>
+    <input id="inputBox" type="text" placeholder="할 일 추가" />
+    <button id="add-todo">Add</button>
+    <hr />
+    <ol id="todo-list"></ol>
+    <script>
+      // ol -> id가져옴(todo-list)
+      const list = document.getElementById("todo-list");
+
+      // 버튼 클릭했을 때 할 일 추가하기
+      // 여기에서 버튼 클릭 시 뭔가 동작함.
+      document.getElementById("add-todo").addEventListener("click", () => {
+        //.value는 인풋박스에 적힌 내용을 의미한다.
+        const todo = document.getElementById("inputBox").value;
+
+        if (todo.trim() === "") {
+          alert("할 일을 입력해주세요.");
+          return;
+        }
+
+        const li = document.createElement("li"); // li라는 HTML 요소를 만듬 createElement로~
+        li.textContent = todo; // textContent로 요소 안에 글자를 넣음
+        list.appendChild(li); // 요소를 다른 요소 안에 넣음 appendChild 사용해서~
+
+        // 입력창 비우기
+        document.getElementById("inputBox").value = "";
+      });
+
+      // 엔터 키 입력 처리
+      document.getElementById("inputBox").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          console.log(e.key);
+          e.preventDefault(); // 기본 동작 막기
+          document.getElementById("add-todo").click();
+        }
+      });
+    </script>
+  </body>
+</html>
