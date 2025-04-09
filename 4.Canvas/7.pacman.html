@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pac-Man Animation</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // pacman 객체로 관리
+      const pacman = {
+        x: 100,
+        y: 200,
+        radius: 30,
+        startAngle: 0.2 * Math.PI,
+        endAngle: 1.8 * Math.PI,
+        angleIncrement: 0.02 * Math.PI,
+        mouthOpen: 1,
+        directionX: 0, // 좌우 이동속도
+      };
+
+      function drawPacman() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.moveTo(pacman.x, pacman.y);
+        ctx.arc(
+          pacman.x,
+          pacman.y,
+          pacman.radius,
+          pacman.startAngle,
+          pacman.endAngle
+        );
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function updateAngles() {
+        // 입 벌어지는 범위 제한 (0.05 ~ 0.25 * PI)
+        if (
+          pacman.startAngle <= 0.05 * Math.PI ||
+          pacman.startAngle >= 0.25 * Math.PI
+        ) {
+          pacman.mouthOpen *= -1;
+        }
+
+        pacman.startAngle += pacman.angleIncrement * pacman.mouthOpen;
+        pacman.endAngle -= pacman.angleIncrement * pacman.mouthOpen;
+      }
+
+      function updatePacmanPosition() {
+        pacman.x += pacman.directionX;
+
+        // 화면 밖으로 나가지 않도록
+        if (pacman.x - pacman.radius < 0) {
+          pacman.x = pacman.radius;
+        } else if (pacman.x + pacman.radius > canvas.width) {
+          pacman.x = canvas.width - pacman.radius;
+        }
+      }
+
+      function handleKeyDown(e) {
+        if (e.key === "ArrowRight") {
+          pacman.directionX = 3;
+        } else if (e.key === "ArrowLeft") {
+          pacman.directionX = -3;
+        }
+      }
+
+      function handleKeyUp(e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          pacman.directionX = 0;
+        }
+      }
+
+      function animate() {
+        updatePacmanPosition();
+        updateAngles();
+        drawPacman();
+        requestAnimationFrame(animate);
+      }
+
+      // 키보드 이벤트 등록
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+
+      animate();
+    </script>
+  </body>
+</html>

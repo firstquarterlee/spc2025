@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="300" height="200"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const ball = {
+        x: 50,
+        y: 50,
+        radius: 20,
+        dx: 2, // x방향 속도
+        dy: 2, // y방향 속도
+      };
+
+      function drawBall() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.closePath();
+
+        // 다음 위치로 이동하기
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+
+        // 미션1. 벽에 부딛히면 반사하기.
+        // 벽에 닿으면 방향 튕기기.
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+          ball.dx = -ball.dx;
+        }
+
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+          ball.dy = -ball.dy;
+        }
+
+        // 미션2. 벽뚫고 반대벽에서 나오기
+        requestAnimationFrame(drawBall);
+      }
+
+      drawBall();
+    </script>
+  </body>
+</html>
