@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>계산기</title>
+    <style>
+      /* CSS 꾸며봄 */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      #stopwatch {
+        background-color: #eee;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      #display {
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+
+      .buttons button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.2s;
+      }
+
+      .buttons button:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stopwatch">
+      <!-- 화면에 시, 분, 초 나타냄 -->
+      <h1 id="display">00:00.00</h1>
+      <!-- Start, Stop, Reset 버튼 만듬 -->
+      <div class="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+    <script>
+      // 1. 시작 버튼 누르면 시간이 흐른다.
+      // 2. 정지 버튼 누르면 멈춘다.
+      // 3. 리셋 버튼 누르면 00:00.00으로 돌아간다.
+
+      // 시간을 저장하기 위해서 변수 선언함.
+      let startTime;
+      let elapsedTime = 0;
+      let timerInterval;
+
+      function updateDisplay() {
+        // elapsedTime은 밀리초 단위를 가지고 있음.
+        const totalMilliseconds = elapsedTime;
+
+        // 밀리초 -> 분, 초, 밀리초로 계산
+        const minutes = Math.floor(totalMilliseconds / 60000);
+        const seconds = Math.floor((totalMilliseconds % 60000) / 1000);
+        const milliseconds = Math.floor((totalMilliseconds % 1000) / 10); // 두 자리로 표시하기 위해
+
+        // 문자열 포맷팅
+        const formattedTime =
+          String(minutes).padStart(2, "0") +
+          ":" +
+          String(seconds).padStart(2, "0") +
+          "." +
+          String(milliseconds).padStart(2, "0");
+
+        document.getElementById("display").innerText = formattedTime;
+      }
+
+      // Start 버튼 클릭 시 로직
+      function startTimer() {
+        startTime = Date.now() - elapsedTime;
+
+        timerInterval = setInterval(function () {
+          elapsedTime = Date.now() - startTime;
+          updateDisplay();
+        }, 10); // 0.01초마다 화면 갱신
+      }
+
+      document.getElementById("start").addEventListener("click", startTimer);
+
+      // Stop 버튼 클릭 시 로직
+      function stopTimer() {
+        clearInterval(timerInterval);
+      }
+
+      document.getElementById("stop").addEventListener("click", stopTimer);
+
+      // Reset 버튼 클릭 시 로직
+      function resetTimer() {
+        clearInterval(timerInterval);
+        elapsedTime = 0;
+        updateDisplay();
+      }
+
+      document.getElementById("reset").addEventListener("click", resetTimer);
+    </script>
+  </body>
+</html>
