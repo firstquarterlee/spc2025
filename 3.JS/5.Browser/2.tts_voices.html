@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
@@ -11,7 +12,7 @@ Hello, this is a text-to-speech example.</textarea
     >
     <div class="controls">
       <select id="voiceSelect"></select>
-      <button onclick="speak()">말하기</button>
+      <button id="speakButton">말하기</button>
     </div>
 
     <script>
@@ -20,13 +21,13 @@ Hello, this is a text-to-speech example.</textarea
         const voiceSelect = document.getElementById("voiceSelect");
         const speakButton = document.getElementById("speakButton");
 
-        // Web Speach API를 지원하느냐?
+        // Web Speech API를 지원하느냐??
         if ("speechSynthesis" in window) {
           console.log("지원함");
 
           function updateVoices() {
             const voices = window.speechSynthesis.getVoices();
-            console.log("사용가능한목소리리스트", voices);
+            console.log("사용가능한목소리리스트:", voices);
 
             voiceSelect.innerHTML = "";
             voices.forEach((voice, index) => {
@@ -37,7 +38,6 @@ Hello, this is a text-to-speech example.</textarea
             });
           }
 
-          // 함수를 넣는게 아님 () xxxxx
           window.speechSynthesis.addEventListener(
             "voiceschanged",
             updateVoices

@@ -49,6 +49,9 @@ function draw() {
 
   context.fillStyle = "blue";
   context.fillRect(snake.x, snake.y, BLOCK_SIZE, BLOCK_SIZE);
+
+  context.fillStyle = "red";
+  context.fillRect(100, 100, BLOCK_SIZE, BLOCK_SIZE);
 }
 
 // 숙제1.
