@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Packman Homework</title>
+    <style>
+      canvas {
+        border: 1px, solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    <script>
+      // 스크립트
+      const canvas = document.getElementById("myCanvas");
+      // ctx(context) -> 왜 줄이냐? 관습적인거다. 또한 canvas.getContext("2d")로 얻은 context객체를 변수에 저장해야함. 그래야지 사용 가능, 2D 그림을 그리는 객체다.
+      const ctx = canvas.getContext("2d");
+
+      // 팩맨 그리기 시작!
+      ctx.beginPath(); // 새로운 경로 시작
+      ctx.moveTo(250, 250); // 원의 중심으로 이동 (canvas의 가운데 쯤)
+      // 캔버스 가운데에 좌표 x = 250, y = 250으로 이동해서 원의 중심에 그리도록 적어줌
+      ctx.arc(250, 250, 100, 0.2 * Math.PI, 1.8 * Math.PI); // 팩맨 입이 벌어진 원 그림.
+      // arc는 원을 그리는 함수이다.
+      // ctx.arc(x, y, radius, startAngle, endAngle) -> 사용 방법
+      // 코드 설명
+      // 250, 250 -> 중심 좌표
+      // 100 -> 반지름
+      // 0.2*Math.PI -> 시작 각도(입 열기 시작), 1.8*Math.PI -> 끝 각도(입 열기 끝)
+      ctx.fillStyle = "yellow"; // 팩맨 색상
+      ctx.fill(); // 색 채우기
+      ctx.closePath(); // 경로 닫기
+    </script>
+  </body>
+</html>
