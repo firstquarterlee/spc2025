@@ -1,1 +1,6 @@
 .vscode
+
+# 기본 모드 모듈
+node_modules/
+
+.DS_Store
