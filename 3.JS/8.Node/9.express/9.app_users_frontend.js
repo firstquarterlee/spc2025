@@ -8,7 +8,7 @@ const users = {};
 let nextId = 1;
 // const user_list = [];
 
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // payload를 (즉 data영역을) 파싱해서, req.body 에 담아줘라...
 
 app.get("/", (req, res) => {
@@ -25,15 +25,39 @@ app.get("/users", (req, res) => {
   // res.json(users); // application/json
 });
 
+// 단일 사용자 조회 라우트 및 함수
+app.get("/users/:id", (req, res) => {
+  console.log("단일 사용자 조회");
+  const id = req.params.id;
+
+  if (!users[id]) {
+    return res
+      .status(404)
+      .json({ success: false, message: "사용자를 찾을 수 없습니다" });
+  }
+
+  const result = {};
+  result[id] = users[id];
+
+  res.json(result);
+});
+
 // 사용자 생성 라우트 및 함수
 app.post("/users", (req, res) => {
   console.log("사용자 생성: ", req.body);
 
-  const name = req.body.name;
+  const { name, email, phone } = req.body;
 
-  users[nextId++] = name; // 나의 key 도 이름, value 도 이름이다.
+  users[nextId] = {
+    name,
+    email: email || "",
+    phone: phone || "",
+    createdAt: new Date().toISOString(),
+  };
 
-  res.send("사용자 생성");
+  nextId++;
+
+  res.json({ success: true, message: "사용자 생성 완료" });
 });
 
 // 사용자 수정 라우트 및 함수
@@ -41,9 +65,23 @@ app.put("/users/:id", (req, res) => {
   console.log("사용자 수정");
   const id = req.params.id;
 
-  users[id] = req.body.name;
+  if (!users[id]) {
+    return res
+      .status(404)
+      .json({ success: false, message: "사용자를 찾을 수 없습니다" });
+  }
 
-  res.send("사용자 수정");
+  const { name, email, phone } = req.body;
+
+  users[id] = {
+    ...users[id],
+    name: name || users[id].name,
+    email: email || users[id].email,
+    phone: phone || users[id].phone,
+    updatedAt: new Date().toISOString(),
+  };
+
+  res.json({ success: true, message: "사용자 수정 완료" });
 });
 
 // 사용자 삭제 라우트 및 함수
@@ -52,9 +90,15 @@ app.delete("/users/:id", (req, res) => {
 
   const id = req.params.id;
 
+  if (!users[id]) {
+    return res
+      .status(404)
+      .json({ success: false, message: "사용자를 찾을 수 없습니다" });
+  }
+
   delete users[id];
 
-  res.send("사용자 삭제");
+  res.json({ success: true, message: "사용자 삭제 완료" });
 });
 
 app.listen(port, () => {
