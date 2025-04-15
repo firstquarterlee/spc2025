@@ -3,8 +3,12 @@ const app = express();
 const path = require("path");
 const port = 3000;
 
+app.use(express.static("public")); //우리의 홈에있는 public 폴더를 정적 폴더로 정의함.
+
+// 미션. 고양이가 안뜸. 왜 안될까?
+
 app.get("/", (req, res) => {
-  const htmlFilePath = path.join(__dirname, "index.html"); // 절대경로 (absolute path, full path)
+  const htmlFilePath = path.join(__dirname, "public", "index.html"); // 절대경로 (absolute path, full path)
   // console.log(htmlFilePath);
   res.sendFile(htmlFilePath);
 });
