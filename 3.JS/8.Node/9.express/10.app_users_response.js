@@ -20,6 +20,9 @@ app.use(express.static("public"));
 
 // 사용자 조회 라우트 및 함수
 app.get("/users", (req, res) => {
+  console.log("접속자가 누구냐??", req.ip, req.headers["user-agent"]);
+  console.log("응답자료구조는?", res);
+
   console.log("사용자 조회");
   res.send(users); // text/html; charset=utf-8  <-- 문자열.. 이게 기본값
   // res.json(users); // application/json
@@ -29,32 +32,48 @@ app.get("/users", (req, res) => {
 app.post("/users", (req, res) => {
   console.log("사용자 생성: ", req.body);
 
-  const name = req.body.name;
+  try {
+    const name = req.body.name;
 
-  users[nextId++] = name; // 나의 key 도 이름, value 도 이름이다.
+    users[nextId++] = name; // 나의 key 도 이름, value 도 이름이다.
 
-  res.send("사용자 생성");
+    // res.send('사용자 생성');
+    res.status(201).send("등록 성공");
+  } catch (error) {
+    res.status(500).send("서버 내부 오류");
+  }
 });
 
 // 사용자 수정 라우트 및 함수
 app.put("/users/:id", (req, res) => {
   console.log("사용자 수정");
-  const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-  users[id] = req.body.name;
+    users[id] = req.body.name;
 
-  res.send("사용자 수정");
+    res.status(200).send("사용자 수정");
+  } catch (error) {
+    res.status(500).send("서버 내부 오류");
+  }
 });
 
 // 사용자 삭제 라우트 및 함수
 app.delete("/users/:id", (req, res) => {
   console.log("사용자 삭제, ", req.params.id);
+  try {
+    const id = req.params.id;
 
-  const id = req.params.id;
+    if (!users[id]) {
+      return res.status(404).send(`해당 사용자(ID:${id})는 존재하지 않습니다.`);
+    }
 
-  delete users[id];
+    delete users[id];
 
-  res.send("사용자 삭제");
+    res.status(204).send(); // 204 No Content
+  } catch (error) {
+    res.status(500).send("서버 내부 오류");
+  }
 });
 
 app.listen(port, () => {
