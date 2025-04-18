@@ -12,3 +12,4 @@ new_dir = "new_directory다"
 # os.rmdir(new_dir)
 
 # 생성 및 삭제.. 중복으로는 불가함..
+print(os.getenv)
