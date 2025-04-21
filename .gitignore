@@ -15,3 +15,10 @@ secret.txt
 
 # 크롬맥암64관련 폴더
 chrome-mac-arm64/
+
+thumbnails/*
+
+# 크리덴셜(Credential) 은 커밋 제외
+secret.txt
+.env
+movie_chart.csv
