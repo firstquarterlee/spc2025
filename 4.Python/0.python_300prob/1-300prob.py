@@ -118,3 +118,6 @@ print(month * muiza)
 
 print("======================")
 
+#021번
+letters = "python"
+print(letters[0], letters[2])
