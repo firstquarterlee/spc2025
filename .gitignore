@@ -22,3 +22,8 @@ thumbnails/*
 secret.txt
 .env
 movie_chart.csv
+
+# db파일 커밋 제외
+*.db
+*.sqlite
+*.sqlite3
