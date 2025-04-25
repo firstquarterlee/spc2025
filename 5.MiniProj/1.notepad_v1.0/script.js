@@ -10,7 +10,7 @@ saveButton.addEventListener("click", (e) => {
 
   // 제목입력, 내용입력 돔 가져옴
   const titleInput = document.querySelector(".input-first");
-  const contentInput = document.querySelector(".input-secoend");
+  const contentInput = document.querySelector(".input-second");
 
   // input에 적은 텍스트 가져오기
   const title = titleInput.value;

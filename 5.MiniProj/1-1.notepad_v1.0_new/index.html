@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메모장 다시 만들기</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- 전체 wrap으로 묶음 -->
+    <div class="wrap">
+      <div class="input-container">
+        <div class="form-group">
+          <h1>메모장</h1>
+        </div>
+        <!-- 제목 입력 -->
+        <div class="form-group">
+          <input
+            class="form-control"
+            id="input-title"
+            name="title"
+            placeholder="제목을 입력하세요"
+          />
+        </div>
+        <!-- 내용 입력 -->
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="input-text"
+            name="message"
+            rows="2"
+            placeholder="내용을 입력하세요"
+          ></textarea>
+        </div>
+        <!-- 저장하기 버튼 -->
+        <div class="form-group">
+          <button type="submit" onclick="uploadPost()" class="btn btn-primary">
+            저장하기
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="note-pad-list"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
