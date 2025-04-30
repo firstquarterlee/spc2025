@@ -24,11 +24,15 @@
           // console.log(data);
           const title = data.title;
           const content = data.body;
+          const userId = data.userId; // 데이터 가져오기.
+          const id = data.id; // 데이터 가져오기.
 
           // 원하는 데이터를 받아다가 다시 우리 페이지에 렌더링...
           document.getElementById("result").innerHTML =
             `<p><strong>타이틀:</strong> ${title}` +
-            `<p><strong>본문:</strong> ${content}`;
+            `<p><strong>본문:</strong> ${content}` +
+            `<p><strong>이것은 UserId:</strong> ${userId}` +
+            `<p><strong>이것은 Id:</strong> ${id}`;
         })
         .catch((error) => {
           document.getElementById(
