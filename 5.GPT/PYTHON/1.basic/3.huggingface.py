@@ -1,5 +1,5 @@
 # pip install huggingface_hub
-# HUGGINGFACEHUB_API_TOKEN=각자계정의키 적어야됨!!
+# HUGGINGFACEHUB_API_TOKEN=각자계정의키
 
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
